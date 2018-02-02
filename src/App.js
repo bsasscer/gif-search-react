@@ -8,23 +8,27 @@ export default class App extends Component {
     constructor() {
         super();
         this.state = {
-            gifs: []
+            gifs: [],
+            loading: true
         };
     }
 
     componentDidMount() {
-
+        this.performSearch();
     }
 
-    performSearch = (query) => {
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`)
-        .then(response => response.json())
-        .then(responseData => {
-            this.setState({gifs: responseData.data});
-        })
-        .catch(error => {
-            console.log('Error fetching and parsing data', error);
-        });
+    performSearch = (query = 'magic') => {
+        fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=wjcGI8OyGNnaULKse4B9k8T732mocB8C`)
+            .then(response => response.json())
+            .then(responseData => {
+                this.setState({
+                    gifs: responseData.data,
+                    loading: false
+                });
+            })
+            .catch(error => {
+                console.log('Error fetching and parsing data', error);
+            });
     }
 
     render() {
@@ -38,7 +42,11 @@ export default class App extends Component {
                   </div>
                 </div>
                 <div className="main-content">
-                  <GifList data={this.state.gifs} />
+                    {
+                        (this.state.loading)
+                        ? <p>Loading</p>
+                        : <GifList data={this.state.gifs} />
+                    }
                 </div>
             </div>
         );
