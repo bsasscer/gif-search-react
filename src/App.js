@@ -18,7 +18,7 @@ export default class App extends Component {
     }
 
     performSearch = (query = 'magic') => {
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=wjcGI8OyGNnaULKse4B9k8T732mocB8C`)
+        fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=wjcGI8OyGNnaULKse4B9k8T732mocB8C`)
             .then(response => response.json())
             .then(responseData => {
                 this.setState({
