@@ -29,10 +29,9 @@ export default class App extends Component {
             .catch(error => {
                 console.log('Error fetching and parsing data', error);
             });
-    }
+        }
 
     render() {
-    console.log(this.state.gifs);
         return (
             <div>
                 <div className="main-header">
